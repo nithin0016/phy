@@ -1,9 +1,62 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Test Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servo Control</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .control { margin-bottom: 10px; }
+        label { margin-right: 10px; }
+    </style>
 </head>
 <body>
-    <h1>Hello, GitHub Pages is Working!</h1>
+    <h1>Servo Motor Control</h1>
+    <div class="control">
+        <label for="knob1">Knob 1:</label>
+        <input type="range" id="knob1" min="0" max="90" value="0" oninput="updateValue('knob1Value', this.value)">
+        <span id="knob1Value">0°</span>
+    </div>
+    <div class="control">
+        <label for="knob2">Knob 2:</label>
+        <input type="range" id="knob2" min="0" max="90" value="0" oninput="updateValue('knob2Value', this.value)">
+        <span id="knob2Value">0°</span>
+    </div>
+    <div class="control">
+        <label for="knob3">Knob 3:</label>
+        <input type="range" id="knob3" min="0" max="90" value="0" oninput="updateValue('knob3Value', this.value)">
+        <span id="knob3Value">0°</span>
+    </div>
+    <div class="control">
+        <label for="slider1">Slider 1:</label>
+        <input type="range" id="slider1" min="0" max="90" value="0" oninput="updateValue('slider1Value', this.value)">
+        <span id="slider1Value">0°</span>
+    </div>
+    <div class="control">
+        <label for="slider2">Slider 2:</label>
+        <input type="range" id="slider2" min="0" max="90" value="0" oninput="updateValue('slider2Value', this.value)">
+        <span id="slider2Value">0°</span>
+    </div>
+    <div class="control">
+        <label for="slider3">Slider 3:</label>
+        <input type="range" id="slider3" min="0" max="90" value="0" oninput="updateValue('slider3Value', this.value)">
+        <span id="slider3Value">0°</span>
+    </div>
+    <button onclick="resetControls()">Reset</button>
+
+    <script>
+        function updateValue(id, value) {
+            document.getElementById(id).innerText = value + '°';
+        }
+
+        function resetControls() {
+            const controls = document.querySelectorAll('input[type="range"]');
+            controls.forEach(control => {
+                control.value = 0;
+                const valueId = control.id + 'Value';
+                document.getElementById(valueId).innerText = '0°';
+            });
+        }
+    </script>
 </body>
 </html>

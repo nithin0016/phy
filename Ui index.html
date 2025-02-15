@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servo Control UI</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .control { margin: 20px; }
+        .slider { width: 80%; }
+    </style>
+    <script>
+        function updateServo(servo, value) {
+            fetch(`https://your-firebase-url.firebaseio.com/servo${servo}.json`, {
+                method: "PUT",
+                body: JSON.stringify(value),
+                headers: { "Content-Type": "application/json" }
+            });
+        }
+        function resetServos() {
+            for (let i = 1; i <= 6; i++) updateServo(i, 0);
+            document.querySelectorAll(".slider").forEach(slider => slider.value = 0);
+        }
+    </script>
+</head>
+<body>
+    <h2>Servo Motor Control</h2>
+    <div class="control">
+        <label>Servo 1</label>
+        <input type="range" class="slider" min="0" max="90" oninput="updateServo(1, this.value)">
+    </div>
+    <div class="control">
+        <label>Servo 2</label>
+        <input type="range" class="slider" min="0" max="90" oninput="updateServo(2, this.value)">
+    </div>
+    <div class="control">
+        <label>Servo 3</label>
+        <input type="range" class="slider" min="0" max="90" oninput="updateServo(3, this.value)">
+    </div>
+    <button onclick="resetServos()">Reset</button>
+</body>
+</html>
